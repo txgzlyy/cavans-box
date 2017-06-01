@@ -7,6 +7,7 @@
 			body{
 				margin: 0;
 				padding: 0;
+				background: #ccc;
 			}
 			#cavans{
 				position: absolute;
@@ -20,16 +21,34 @@
 		</style>
 	</head>
 	<body>
-		<canvas id="cavans" width="500" height="500"></canvas>
+		<canvas id="cavans" width="470" height="470"></canvas>
 		
 		<script type="text/javascript">
 			var cavans = document.getElementById("cavans");
 			var gc = cavans.getContext('2d');
 			var data = getdata(12,12);
 			
-			gc.fillStyle = 'red';
-			gc.fillRect(100,100,200,200);
+//			gc.fillStyle = 'red';
+//			gc.fillRect(100,100,200,200);
 			
+			
+			
+			getmap(data,gc);
+			
+			
+			
+			
+			
+			function getmap(data,gc){
+				var rlen = data.length;
+				var clen = data[0].length;
+				for (var i=0;i<rlen;i++) {
+            		for (var j=0;j<clen;j++) {
+            			gc.fillStyle = '#1EB747';
+            			gc.fillRect(j*40,i*40,30,30);
+            		}
+            	}
+			}
 			
             function getdata(r,c){
             	var data = [];
@@ -41,7 +60,7 @@
             	}
             	return data;
             }
-			console.log(data)
+			//console.log(data)
 		</script>
 	</body>
 </html>
