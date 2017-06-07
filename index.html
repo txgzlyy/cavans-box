@@ -21,35 +21,76 @@
 		</style>
 	</head>
 	<body>
-		<canvas id="cavans" width="470" height="470"></canvas>
+		<canvas id="cavans" width="500" height="500"></canvas>
 		
 		<script type="text/javascript">
 			var cavans = document.getElementById("cavans");
 			var gc = cavans.getContext('2d');
 			var data = getdata(12,12);
+			var arr = [
+			    [[1,1,1,1]],
+			    [[1,1],[1,1]],
+			    [[1,1,0],[0,1,1]],
+			    [[0,1,1],[1,1,0]],
+			    [[0,1,0],[1,1,1]],
+			    [[1,0,0],[1,1,1]],
+			    [[0,0,1],[1,1,1]]
+			];
+			var y = 0;
+			var x = 0;
+			var arr1 = getBoxNum();
+			var TimerStart = null;
 			
 //			gc.fillStyle = 'red';
 //			gc.fillRect(100,100,200,200);
 			
 			
 			
-			getmap(data,gc);
+			//getmap(data,gc);
 			
 			
 			
+			getBox()
 			
+//			function goBox(){
+//				y++;
+//			}
 			
+			 
+			//TimerStart = setInterval(goBox,400)
+			
+			//  得到方块
+			function getBox(){
+			    for(var i=0;i<arr1.length;i++){
+					for (var j=0;j<arr1[i].length;j++) {
+						data[i+y][j+5+x] = arr1[i][j];
+					}
+				}
+				getmap(data,gc);
+				
+			}
+			
+			//创建 绘制方块数据
+			function getBoxNum(){
+				var num = Math.floor(Math.random()*7);
+				return arr[num];
+			}
+			
+			//  绘制地图 
 			function getmap(data,gc){
+				var w = 500/12 - 10;
+				var h = w;
 				var rlen = data.length;
 				var clen = data[0].length;
 				for (var i=0;i<rlen;i++) {
             		for (var j=0;j<clen;j++) {
-            			gc.fillStyle = '#1EB747';
-            			gc.fillRect(j*40,i*40,30,30);
+            			gc.fillStyle = data[i][j]==0?'#1EB747':'#216BDE';
+            			gc.fillRect(j*(w+10)+5,i*(h+10)+5,w,h);
             		}
             	}
 			}  
 			
+			//  创建数据
             function getdata(r,c){
             	var data = [];
             	for (var i=0;i<r;i++) {
@@ -60,7 +101,7 @@
             	}
             	return data;
             }
-			//console.log(data)
+			
 		</script>
 	</body>
 </html>
